@@ -12,9 +12,4 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 		if (!localStorage.getItem('secion')) this.router.navigate([ 'login' ]);
 	}
-
-	Refrescar() {
-		localStorage.removeItem('secion');
-		this.router.navigate([ 'login' ]);
-	}
 }
