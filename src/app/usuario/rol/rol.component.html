@@ -1,36 +1,31 @@
 <div class="row">
-    <div class="col col-md-8">
+    <div class="col col-lg-6 offset-lg-1 col-md-8 col-sm-12" >
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-hover" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
+                                <th>IdRol</th>
+                                <th>Nombre Rol</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
+                                <th>IdRol</th>
+                                <th>Nombre Rol</th>
                                 <th>Opciones</th>
                             </tr>
                         </tfoot>
-                        <tbody>
-                            <tr>
-                                <td>Bruno Nash</td>
-                                <td>Software Engineer</td>
-                                <td>London</td>
-                            </tr>
-                            <tr>
-                                <td>Sakura Yamamoto</td>
-                                <td>Support Engineer</td>
-                                <td>Tokyo</td>
+                        <tbody >
+                            <tr *ngFor="let rol of roles">
+                                <td>{{ rol.IdRol }}</td>
+                                <td>{{ rol.NombreRol }}</td>
+                                <td>Opciones</td>
                             </tr>
                         </tbody>
                     </table>
@@ -38,42 +33,24 @@
             </div>
         </div>
     </div>
-    <div class="col col-md-4">
+    <div class="col col-lg-4 col-md-4 col-sm-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Formulario de Roles</h6>
             </div>
             <div class="card-body">
-                <form>
+                <form #f="ngForm">
                     <div class="form-group">
-                        <label for="codigo">Código De Rol</label>
-                        <input type="text" class="form-control" id="codigo" aria-describedby="codigoHelp" placeholder="Ingrese Aqui el Código del Rol">
+                        <label>Código De Rol</label>
+                        <input type="text" class="form-control" [(ngModel)]="rol.IdRol" name="IdRol" placeholder="Ingrese Aqui el Código del Rol">
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Nombre De Rol</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Ingrese Aqui el Nombre del Rol">
+                        <label>Nombre De Rol</label>
+                        <input type="text" class="form-control" [(ngModel)]="rol.NombreRol" name="NombreRol" placeholder="Ingrese Aqui el Nombre del Rol">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button class="btn btn-primary" (click)="SaveRol()">Enviar</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4" *ngFor="let game of games">
-        <div class="card text-center">
-          <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-            {{ rol.IdRol }}
-            <button class="btn btn-danger" (click)="deleteGame(game.id)">
-              <i class="far fa-trash-alt"></i>
-            </button>
-          </div>
-          <img class="card-img-top" [src]="game.image" />
-          <div class="card-body">
-            <p>{{ rol.NombreRol }}</p>
-          </div>
-        </div>
-      </div>
-
 </div>

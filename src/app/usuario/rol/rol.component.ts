@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RolService } from './rol.service';
 import { Rol } from './rol';
+
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-bs4';
 
 @Component({
 	selector: 'app-rol',
@@ -8,18 +13,58 @@ import { Rol } from './rol';
 	styleUrls: [ './rol.component.css' ]
 })
 export class RolComponent implements OnInit {
-	rol: any = [];
-	constructor(protected rolService: RolService) {}
+	roles: any = [];
+	dataTable: any;
+	rol: Rol = {
+		IdRol: '',
+		NombreRol: ''
+	};
+
+	constructor(protected rolService: RolService, private chRef: ChangeDetectorRef, private route: Router, private activatedRoute: ActivatedRoute) {}
 
 	ngOnInit() {
 		this.GetRols();
-		console.log(this.rol);
+		console.log(this.roles);
 	}
 
 	GetRols() {
 		this.rolService.GetRols().subscribe(
 			(res) => {
-				this.rol = res;
+				this.roles = res;
+				this.chRef.detectChanges();
+				const table: any = $('table');
+				this.dataTable = table.DataTable({
+					language: {
+						decimal: '',
+						emptyTable: 'No hay información',
+						info: 'Mostrando _START_ a _END_ de _TOTAL_ Entradas',
+						infoEmpty: 'Mostrando 0 to 0 of 0 Entradas',
+						infoFiltered: '(Filtrado de _MAX_ total entradas)',
+						infoPostFix: '',
+						thousands: ',',
+						lengthMenu: 'Mostrar _MENU_ Entradas',
+						loadingRecords: 'Cargando...',
+						processing: 'Procesando...',
+						search: 'Buscar:',
+						zeroRecords: 'Sin resultados encontrados',
+						paginate: {
+							first: 'Primero',
+							last: 'Ultimo',
+							next: 'Siguiente',
+							previous: 'Anterior'
+						}
+					}
+				});
+			},
+			(err) => console.log(err)
+		);
+	}
+
+	SaveRol() {
+		this.rolService.SaveRol(this.rol).subscribe(
+			(res) => {
+				console.log(res);
+				this.route.navigate([ '/rol' ]);
 			},
 			(err) => console.log(err)
 		);

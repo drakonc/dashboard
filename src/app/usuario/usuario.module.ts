@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { RolComponent } from './rol/rol.component';
 import { RolService } from './rol/rol.service';
@@ -8,6 +9,6 @@ import { RolService } from './rol/rol.service';
 	declarations: [ RolComponent ],
 	exports: [ RolComponent ],
 	providers: [ RolService ],
-	imports: [ CommonModule, AppRoutingModule ]
+	imports: [ CommonModule, AppRoutingModule,FormsModule ]
 })
 export class UsuarioModule {}
