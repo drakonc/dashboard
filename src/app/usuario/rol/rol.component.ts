@@ -17,14 +17,14 @@ export class RolComponent implements OnInit {
 	dataTable: any;
 	rol: Rol = {
 		IdRol: '',
-		NombreRol: ''
+		NombreRol: '',
+		created_at: null
 	};
 
 	constructor(protected rolService: RolService, private chRef: ChangeDetectorRef, private route: Router, private activatedRoute: ActivatedRoute) {}
 
 	ngOnInit() {
 		this.GetRols();
-		console.log(this.roles);
 	}
 
 	GetRols() {
@@ -63,10 +63,14 @@ export class RolComponent implements OnInit {
 	SaveRol() {
 		this.rolService.SaveRol(this.rol).subscribe(
 			(res) => {
+				console.log('Despues de Insertar');
 				console.log(res);
-				this.route.navigate([ '/rol' ]);
+				//this.route.navigate([ '/rol' ]);
 			},
-			(err) => console.log(err)
+			(err) => {
+				console.log(err.error);
+				if (err.error == null) console.log('entro');
+			}
 		);
 	}
 }

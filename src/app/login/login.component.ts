@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
 	}
 
 	submit() {
-		console.log(this.model);
 		if (this.model.username === 'jcastro' && this.model.password === 'Passw0rd!!') {
 			localStorage.setItem('secion', 'Activo');
 			this.router.navigate([ '/' ]);

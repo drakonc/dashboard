@@ -7,7 +7,7 @@ import { Rol } from './rol';
 	providedIn: 'root'
 })
 export class RolService {
-	API_URI = 'http://192.168.253.10:3000/api';
+	API_URI = 'http://localhost:3000';
 	constructor(private http: HttpClient) {}
 
 	httpOptions = {
@@ -25,7 +25,6 @@ export class RolService {
 	}
 
 	SaveRol(rol: Rol) {
-		console.log(rol);
 		return this.http.post(`${this.API_URI}/rol`, rol);
 	}
 }

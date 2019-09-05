@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 @Component({
 	selector: 'app-root',
